@@ -8,5 +8,8 @@
   },
   "keywords": [],
   "author": "",
+  "dependencies": {
+    "node-fetch": "^3.2.7"
+  },
   "license": "ISC"
 }

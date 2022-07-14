@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "prebuild": "cd ../../ && npm run build",
-    "start": "npm run prebuild && ts-node index.ts"
+    "start": "ts-node index.ts"
   },
   "license": "MIT",
   "private": true,

@@ -1,6 +1,11 @@
-import { LastfmRawImage } from './image'
+import type {
+  LastfmRawImage,
+  PaginatedResponseAttributes,
+  StringRecord
+} from './common'
 
-export interface LastfmRawUserInfoResponse {
+// user.getInfo
+export interface LastfmOriginalUserInfoResponse {
   user: {
     name: string
     realname: string
@@ -32,4 +37,38 @@ export interface LastfmUserInfo {
   images: [] // @todo
   subscriber: boolean
   gender: string
+}
+
+// user.getRecentTracks
+
+export interface LastfmOriginalUserRecentTracksResponse {
+  recenttracks: {
+    track: {
+      name: string
+      url: string
+      streamable: string
+      mbid: string
+      artist: StringRecord<'mbid' | '#text'>
+      image: LastfmRawImage[]
+      album: StringRecord<'mbid' | '#text'>
+      date: StringRecord<'uts' | '#text'>
+    }[]
+    '@attr': PaginatedResponseAttributes<'user'>
+  }
+}
+
+// user.getTopArtists
+export interface LastfmOriginalUserTopArtistsResponse {
+  topartists: {
+    artist: {
+      name: string
+      mbid: string
+      url: string
+      playcount: string
+      streamable: string
+      '@attr': StringRecord<'rank'>
+      image: LastfmRawImage[]
+    }[]
+    '@attr': PaginatedResponseAttributes<'user'>
+  }
 }

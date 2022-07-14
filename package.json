@@ -1,6 +1,6 @@
 {
-  "name": "@musicorum-app/lastfm",
-  "version": "1.0.0",
+  "name": "@musicorum/lastfm",
+  "version": "0.0.0",
   "description": "",
   "main": "dist/LastClient.js",
   "types": "dist/LastClient.d.ts",
@@ -9,7 +9,7 @@
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": ["lastfm", "last.fm", "typed"],
   "author": "Musicorum Team",
   "contributors": [
     {
@@ -22,10 +22,14 @@
       "email": "lyricalsoul@proton.me"
     }
   ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/musicorum-app/lastfm"
+  },
   "dependencies": {
     "node-fetch": "^3.2.7"
   },
-  "license": "ISC",
   "devDependencies": {
     "@types/node": "^18.0.3",
     "@typescript-eslint/eslint-plugin": "^5.30.6",

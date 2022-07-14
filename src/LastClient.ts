@@ -1,18 +1,17 @@
 import fetch from 'node-fetch'
-import { LastfmError } from './error/LastfmError.js'
-import {
+import { LastfmError } from './error/LastfmError'
+import { User } from './packages/User'
+import type {
+  GetOriginalResponse,
   LastfmApiMethod,
-  LastfmOriginalResponses,
-  LastfmResponse
-} from './types/responses.js'
-import {
-  LastfmRawUserInfoResponse,
-  LastfmUserInfo
-} from './types/responses/user.js'
-import { isLastfmError } from './utils.js'
+  LastfmResponses
+} from './types/responses'
+import { isLastfmError } from './utils'
 
 export default class LastClient {
   private apiUrl = 'https://ws.audioscrobbler.com/2.0'
+
+  public user = new User(this)
 
   constructor(
     public apiKey: string,
@@ -40,30 +39,11 @@ export default class LastClient {
       const response = await fetch(`${this.apiUrl}?${queryString}`).then((r) =>
         r.json()
       )
-      return response as LastfmOriginalResponses[M]
+      return response as GetOriginalResponse<LastfmResponses[M]>
     } catch (error) {
       if (isLastfmError(error)) {
         throw new LastfmError(error)
       } else throw error
-    }
-  }
-
-  async getUserInfo(
-    user: string
-  ): Promise<LastfmResponse<LastfmRawUserInfoResponse, LastfmUserInfo>> {
-    const original = await this.request('user.getInfo', { user })
-    return {
-      name: original.user.name,
-      realName: original.user.name,
-      age: parseInt(original.user.age),
-      playCount: parseInt(original.user.playcount),
-      country: original.user.country,
-      registered: new Date(original.user.registered.unixtime),
-      gender: original.user.gender,
-      subscriber: original.user.subscriber === '1',
-      images: [],
-      url: original.user.url,
-      original
     }
   }
 }

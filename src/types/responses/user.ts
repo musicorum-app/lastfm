@@ -1,4 +1,5 @@
 import type {
+  LastfmDate,
   LastfmRawImage,
   PaginatedResponseAttributes,
   StringRecord
@@ -41,18 +42,36 @@ export interface LastfmUserInfo {
 
 // user.getRecentTracks
 
-export interface LastfmOriginalUserRecentTracksResponse {
+export interface LastfmUserRecentTracksResponseTrack {
+  artist: StringRecord<'mbid' | '#text'>
+  streamable: '0' | '1'
+  image: LastfmRawImage[]
+  mbid: string
+  album: StringRecord<'mbid' | '#text'>
+  name: string
+  url: string
+  date: LastfmDate
+  '@attr'?: {
+    nowplaying: 'true'
+  }
+}
+
+export interface LastfmUserRecentTracksResponseTrackExtendedAttrs {
+  artist: StringRecord<'mbid' | '#text'> & { image: LastfmRawImage[] }
+  loved: '1' | '0'
+}
+
+export type LastfmUserRecentTrackResponseResource<EXTENDED extends boolean> =
+  EXTENDED extends true
+    ? LastfmUserRecentTracksResponseTrack &
+        LastfmUserRecentTracksResponseTrackExtendedAttrs
+    : LastfmUserRecentTracksResponseTrack
+
+export interface LastfmOriginalUserRecentTracksResponse<
+  EXTENDED extends boolean
+> {
   recenttracks: {
-    track: {
-      name: string
-      url: string
-      streamable: string
-      mbid: string
-      artist: StringRecord<'mbid' | '#text'>
-      image: LastfmRawImage[]
-      album: StringRecord<'mbid' | '#text'>
-      date: StringRecord<'uts' | '#text'>
-    }[]
+    track: LastfmUserRecentTrackResponseResource<EXTENDED>[]
     '@attr': PaginatedResponseAttributes<'user'>
   }
 }

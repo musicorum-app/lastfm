@@ -21,4 +21,23 @@ export class User {
       url: original.user.url
     }
   }
+
+  // @todo
+  async getRecentTracks<EXTENDED = boolean, RESOURCE extends >(
+    user: string,
+    perPage = 20,
+    page = 1,
+    extended: EXTENDED = false,
+    from?: Date,
+    to?: Date
+  ) {
+    const response = await this.client.request('user.getRecentTracks', {
+      user,
+      limit: perPage.toString(),
+      page: page.toString(),
+      from: from
+    })
+
+    response.recenttracks.track[0]['@attr']
+  }
 }

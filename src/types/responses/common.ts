@@ -11,3 +11,5 @@ export type PaginatedResponseAttributes<EXTRA extends string = never> = {
   perPage: string
   total: string
 } & { [K in EXTRA]: string }
+
+export type LastfmDate = StringRecord<'uts' | '#text'>

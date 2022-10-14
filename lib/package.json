@@ -1,0 +1,48 @@
+{
+  "name": "@musicorum/lastfm",
+  "version": "0.0.0",
+  "description": "",
+  "main": "dist/LastClient.js",
+  "types": "dist/LastClient.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "lastfm",
+    "last.fm",
+    "typed"
+  ],
+  "author": "Musicorum Team",
+  "contributors": [
+    {
+      "name": "Matheus Dias",
+      "email": "methidezeeni@gmail.com",
+      "url": "https://matehus.dev"
+    },
+    {
+      "name": "Renan Ribeiro",
+      "email": "lyricalsoul@proton.me"
+    }
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/musicorum-app/lastfm"
+  },
+  "dependencies": {
+    "node-fetch": "^3.2.7"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.3",
+    "@typescript-eslint/eslint-plugin": "^5.30.6",
+    "@typescript-eslint/parser": "^5.30.6",
+    "babel-cli": "^6.26.0",
+    "eslint": "^8.19.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4"
+  }
+}

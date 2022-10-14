@@ -1,8 +1,20 @@
 export type StringRecord<K extends string> = Record<K, string>
 
+export type LastfmImageSize =
+  | 'small'
+  | 'medium'
+  | 'large'
+  | 'extralarge'
+  | 'mega'
+
 export interface LastfmRawImage {
-  size: 'small' | 'medium' | 'large' | 'extralarge' | 'mega'
+  size: LastfmImageSize
   '#text': string
+}
+
+export interface LastfmImage {
+  size: LastfmImageSize
+  url: string
 }
 
 export type PaginatedResponseAttributes<EXTRA extends string = never> = {

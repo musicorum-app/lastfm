@@ -3,7 +3,7 @@ import type {
   LastfmOriginalUserRecentTracksResponse,
   LastfmOriginalUserTopArtistsResponse,
   LastfmUserInfo
-} from './responses/user'
+} from './packages/user'
 
 export interface LastfmErrorResponse {
   error: number

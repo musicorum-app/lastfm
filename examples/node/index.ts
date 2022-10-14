@@ -12,8 +12,13 @@ async function main() {
     user2.playCount
   )
   
-  const recentTracks = await client.request('user.getRecentTracks', { user: 'metye' })
+  const recentTracks = await client.user.getRecentTracksPaginated('metye')
+  console.log(`${recentTracks.totalResults} results in ${recentTracks.totalPages} pages`)
 
-  console.log(recentTracks.recenttracks.track[0].name)
+  const page1 = recentTracks.getPage(1)
+  const page2 = await recentTracks.fetchPage(2)
+
+  console.log(page1[0].name, '- is listening now:', page1[0].nowPlaying)
+  console.log(page2[0].name)
 }
 main()

@@ -1,12 +1,12 @@
 import fetch from 'node-fetch'
-import { LastfmError } from './error/LastfmError'
-import { User } from './packages/User'
+import { LastfmError } from './error/LastfmError.js'
+import { User } from './packages/User.js'
 import type {
   GetOriginalResponse,
   LastfmApiMethod,
   LastfmResponses
 } from './types/responses'
-import { isLastfmError } from './utils'
+import { isLastfmError } from './utils.js'
 
 export default class LastClient {
   private apiUrl = 'https://ws.audioscrobbler.com/2.0'

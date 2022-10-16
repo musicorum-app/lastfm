@@ -5,13 +5,12 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "prebuild": "cd ../../ && npm run build",
     "start": "ts-node index.ts"
   },
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@musicorum/lastfm": "file:../../"
+    "@musicorum/lastfm": "*"
   },
   "devDependencies": {
     "ts-node": "^10.8.2"

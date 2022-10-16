@@ -3,7 +3,7 @@ import type {
   LastfmOriginalUserRecentTracksResponse,
   LastfmOriginalUserTopArtistsResponse,
   LastfmUserInfo
-} from './responses/user'
+} from './packages/user'
 
 export interface LastfmErrorResponse {
   error: number
@@ -23,7 +23,9 @@ export type GetFormattedResponse<R extends LastfmResponse<unknown, unknown>> =
 
 export type LastfmResponses = {
   'user.getInfo': LastfmResponse<LastfmOriginalUserInfoResponse, LastfmUserInfo>
-  'user.getRecentTracks': LastfmResponse<LastfmOriginalUserRecentTracksResponse>
+  'user.getRecentTracks': LastfmResponse<
+    LastfmOriginalUserRecentTracksResponse<true | false>
+  >
   'user.getTopArtists': LastfmResponse<LastfmOriginalUserTopArtistsResponse>
 }
 

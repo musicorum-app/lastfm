@@ -1,4 +1,3 @@
-import fetch from 'node-fetch'
 import { LastfmError } from './error/LastfmError.js'
 import { User } from './packages/User.js'
 import type {
@@ -7,6 +6,7 @@ import type {
   LastfmResponses
 } from './types/responses'
 import { isLastfmError } from './utils.js'
+import axios from 'axios'
 
 export default class LastClient {
   private apiUrl = 'https://ws.audioscrobbler.com/2.0'
@@ -36,9 +36,9 @@ export default class LastClient {
         format: 'json'
       }
       const queryString = new URLSearchParams(params).toString()
-      const response = await fetch(`${this.apiUrl}?${queryString}`).then((r) =>
-        r.json()
-      )
+      const response = await axios
+        .get(`${this.apiUrl}?${queryString}`)
+        .then((r) => r.data)
       return response as GetOriginalResponse<LastfmResponses[M]>
     } catch (error) {
       if (isLastfmError(error)) {

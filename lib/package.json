@@ -1,6 +1,6 @@
 {
   "name": "@musicorum/lastfm",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "dist/LastClient.js",
   "types": "dist/LastClient.d.ts",

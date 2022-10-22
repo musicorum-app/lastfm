@@ -6,7 +6,7 @@ import type {
   LastfmResponses
 } from './types/responses'
 import { isLastfmError } from './utils.js'
-import axios from 'axios'
+import axios, { Axios } from 'axios'
 
 export default class LastClient {
   private apiUrl = 'https://ws.audioscrobbler.com/2.0'
@@ -41,8 +41,12 @@ export default class LastClient {
         .then((r) => r.data)
       return response as GetOriginalResponse<LastfmResponses[M]>
     } catch (error) {
-      if (isLastfmError(error)) {
-        throw new LastfmError(error)
+      if (
+        axios.isAxiosError(error) &&
+        error.response &&
+        isLastfmError(error?.response?.data)
+      ) {
+        throw new LastfmError(error.response.data)
       } else throw error
     }
   }

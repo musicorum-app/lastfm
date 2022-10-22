@@ -1,4 +1,5 @@
 import LastClient from '@musicorum/lastfm'
+import {LastfmError} from '@musicorum/lastfm/dist/error/LastfmError'
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const client = new LastClient(process.env.LASTFM_KEY!)
@@ -20,5 +21,13 @@ async function main() {
 
   console.log(page1[0].name, '- is listening now:', page1[0].nowPlaying)
   console.log(page2[0].name)
+
+  try {
+    const user2 = await client.user.getInfo('aaa fff ssdds')
+  } catch (err) {
+    if (err instanceof LastfmError) {
+      console.log(err.error)
+    }
+  }
 }
 main()

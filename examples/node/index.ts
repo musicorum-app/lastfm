@@ -10,7 +10,7 @@ async function main() {
 
   console.log(
     user1.user.playcount,
-    user2.playCount
+    user2.images
   )
   
   const recentTracks = await client.user.getRecentTracksPaginated('metye')

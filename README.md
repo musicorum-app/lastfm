@@ -23,6 +23,14 @@ async function main() {
     user1.user.playcount,
     user2.playCount
   )
+
+  const recentTracks = await client.user.getRecentTracksPaginated('metye')
+  console.log(`${recentTracks.totalResults} results in ${recentTracks.totalPages} pages`)
+
+  const page1 = recentTracks.getPage(1)
+  const page2 = await recentTracks.fetchPage(2)
+
+  console.log('Last scrobble:', page1[0].name, page1[0].nowPlaying ? ' - Now playing' : '')
 }
 main()
 ```

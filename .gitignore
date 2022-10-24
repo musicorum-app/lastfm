@@ -123,3 +123,6 @@ dist
 .idea
 *.iml
 gen
+
+
+lib/README.md

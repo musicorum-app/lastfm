@@ -24,7 +24,7 @@ export class User {
       registered: new Date(parseInt(original.user.registered.unixtime) * 1000),
       gender: original.user.gender,
       subscriber: original.user.subscriber === '1',
-      images: [],
+      images: parseLastfmImages(original.user.image),
       url: original.user.url
     }
   }

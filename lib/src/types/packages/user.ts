@@ -79,7 +79,7 @@ export interface LastfmUserRecentTracksResponseTrack {
   album: StringRecord<'mbid' | '#text'>
   name: string
   url: string
-  date: LastfmDate
+  date?: LastfmDate
   '@attr'?: {
     nowplaying: 'true'
   }
@@ -119,8 +119,8 @@ export interface LastfmRecentTracksTrack {
     mbid?: string
   }
   url: string
-  date: Date
-  nowPlaying: boolean
+  date?: Date
+  nowPlaying?: boolean
 }
 
 export interface LastfmRecentTracksTrackExtended

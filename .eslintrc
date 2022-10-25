@@ -16,6 +16,11 @@
     "prettier"
   ],
   "rules": {
-    "prettier/prettier": 1
+    "prettier/prettier": [
+      "warn",
+      {
+        "endOfLine": "auto"
+      }
+    ]
   }
 }

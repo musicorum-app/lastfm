@@ -65,7 +65,9 @@ export class User {
         mbid: track.album.mbid ?? undefined
       },
       url: track.url,
-      date: new Date(parseInt(track.date.uts) * 1000),
+      date: track.date?.uts
+        ? new Date(parseInt(track.date.uts) * 1000)
+        : undefined,
       nowPlaying: track['@attr']?.nowplaying === 'true',
       loved: 'loved' in track ? track.loved === '1' : undefined
     })) as LastfmRecentTracksTrackResource<EXTENDED>[]

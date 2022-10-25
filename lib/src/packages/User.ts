@@ -56,7 +56,7 @@ export class User {
       mbid: track.mbid ?? undefined,
       streamable: track.streamable == '1',
       artist: {
-        name: track.artist['#text'],
+        name: track.artist.name,
         mbid: track.artist.mbid ?? undefined
       },
       images: parseLastfmImages(track.image),

@@ -72,7 +72,7 @@ export interface LastfmUserRecentTracksParams {
 }
 
 export interface LastfmUserRecentTracksResponseTrack {
-  artist: StringRecord<'mbid' | '#text'>
+  artist: StringRecord<'mbid' | 'name' | 'url'>
   streamable: '0' | '1'
   image: LastfmRawImage[]
   mbid: string
@@ -87,7 +87,7 @@ export interface LastfmUserRecentTracksResponseTrack {
 
 export interface LastfmUserRecentTracksResponseTrackExtended
   extends LastfmUserRecentTracksResponseTrack {
-  artist: StringRecord<'mbid' | '#text'> & { image: LastfmRawImage[] }
+  artist: StringRecord<'mbid' | 'name' | 'url'> & { image: LastfmRawImage[] }
   loved: '1' | '0'
 }
 

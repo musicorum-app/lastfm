@@ -72,7 +72,7 @@ export interface LastfmUserRecentTracksParams {
 }
 
 export interface LastfmUserRecentTracksResponseTrack {
-  artist: StringRecord<'mbid' | 'name' | 'url'>
+  artist: StringRecord<'mbid' | 'name' | 'url' | '#text'>
   streamable: '0' | '1'
   image: LastfmRawImage[]
   mbid: string
@@ -87,7 +87,9 @@ export interface LastfmUserRecentTracksResponseTrack {
 
 export interface LastfmUserRecentTracksResponseTrackExtended
   extends LastfmUserRecentTracksResponseTrack {
-  artist: StringRecord<'mbid' | 'name' | 'url'> & { image: LastfmRawImage[] }
+  artist: StringRecord<'mbid' | 'name' | 'url' | '#text'> & {
+    image: LastfmRawImage[]
+  }
   loved: '1' | '0'
 }
 
@@ -100,7 +102,9 @@ export interface LastfmOriginalUserRecentTracksResponse<
   EXTENDED extends boolean
 > {
   recenttracks: {
-    track: LastfmUserRecentTrackResponseResource<EXTENDED>[]
+    track:
+      | LastfmUserRecentTrackResponseResource<EXTENDED>
+      | LastfmUserRecentTrackResponseResource<EXTENDED>[]
     '@attr': PaginatedResponseAttributes<'user'>
   }
 }

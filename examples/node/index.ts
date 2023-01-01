@@ -13,21 +13,17 @@ async function main() {
     user2.images
   )
   
-  const recentTracks = await client.user.getRecentTracksPaginated('metye')
+  const recentTracks = await client.user.getRecentTracksPaginated('metye', {
+    extended: false
+  })
   console.log(`${recentTracks.totalResults} results in ${recentTracks.totalPages} pages`)
 
+  
   const page1 = recentTracks.getPage(1)
   const page2 = await recentTracks.fetchPage(2)
+  console.log(page1[2])
 
   console.log(page1[0].name, '- is listening now:', page1[0].nowPlaying)
   console.log(page2[0].name)
-
-  try {
-    const user2 = await client.user.getInfo('aaa fff ssdds')
-  } catch (err) {
-    if (err instanceof LastfmError) {
-      console.log(err.error, err.error === LastfmErrorCode.PARAMETER_ERROR)
-    }
-  }
 }
 main()

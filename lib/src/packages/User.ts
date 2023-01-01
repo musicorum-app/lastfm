@@ -51,12 +51,16 @@ export class User {
       stringParams
     )
 
-    const tracks = response.recenttracks.track.map((track) => ({
+    const trackList = Array.isArray(response.recenttracks.track)
+      ? response.recenttracks.track
+      : [response.recenttracks.track]
+
+    const tracks = trackList.map((track) => ({
       name: track.name,
       mbid: track.mbid ?? undefined,
       streamable: track.streamable == '1',
       artist: {
-        name: track.artist.name,
+        name: track.artist.name || track.artist['#text'],
         mbid: track.artist.mbid ?? undefined
       },
       images: parseLastfmImages(track.image),

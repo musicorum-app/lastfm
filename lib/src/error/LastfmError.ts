@@ -9,8 +9,15 @@ export class LastfmError extends Error {
   }
 }
 
+/**
+ * Sources: {@link https://lastfm-docs.github.io/api-docs/codes/} and {@link https://www.last.fm/api/errorcodes}
+ */
 export enum LastfmErrorCode {
+  /**
+   * This service does not exist
+   */
   SERVICE_UNAVAILABLE = 2,
+
   /**
    *  No method with that name in this package
    */
@@ -29,7 +36,7 @@ export enum LastfmErrorCode {
   /**
    * Your request is missing a required parameter
    */
-  PARAMETER_ERROR = 6,
+  INVALID_PARAMETER = 6,
 
   /**
    * Invalid resource specified
@@ -37,9 +44,9 @@ export enum LastfmErrorCode {
   INVALID_RESOURCE = 7,
 
   /**
-   * Something else went wrong
+   * Most likely the backend service failed. Please try again.
    */
-  GENERIC_ERROR = 8,
+  OPERATION_FAILED = 8,
 
   /**
    *  Invalid session key - Please re-authenticate
@@ -47,19 +54,45 @@ export enum LastfmErrorCode {
   INVALID_SERSSION_TOKEN = 9,
 
   /**
-   * You must be granted a valid key by last.fm
+   * You must be granted with a valid key by last.fm
    */
   INVALID_API_TOKEN = 10,
 
   /**
-   * This service is temporarily offline. Try again later.
+   * This service is temporary offline. Try again later.
    */
   SERVICE_OFFLINE = 11,
 
   /**
-   * Access for your account has been suspended, please contact Last.fm
+   * Invalid method signature supplied
    */
-  API_KEY_BANNED = 26,
+  INVALID_SIGNATURE = 13,
+
+  /**
+   * This token has not been authorized
+   */
+  UNAUTHORIZED_TOKEN = 14,
+
+  /**
+   * The service is temporarily unavailable, please try again.
+   */
+  TEMPORARY_ERROR = 16,
+
+  /**
+   * User requires to be logged in to use this
+   * This may be caused when trying to get some user's data with restricted privicy
+   */
+  REQUIRES_LOGIN = 17,
+
+  /**
+   * This application is not allowed to make requests to the web services
+   */
+  API_KEY_SUSPENDED = 26,
+
+  /**
+   * This type of request is no longer supported
+   */
+  DEPRECATED = 27,
 
   /**
    * Your IP has made too many requests in a short period

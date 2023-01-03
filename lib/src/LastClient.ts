@@ -5,8 +5,6 @@ import type {
   LastfmApiMethod,
   LastfmResponses
 } from './types/responses'
-import { isLastfmError } from './utils.js'
-import axios, { Axios } from 'axios'
 
 export default class LastClient {
   private apiUrl = 'https://ws.audioscrobbler.com/2.0'
@@ -28,26 +26,18 @@ export default class LastClient {
     method: M,
     params?: Record<string, string>
   ) {
-    try {
-      params = {
-        ...params,
-        method,
-        api_key: this.apiKey,
-        format: 'json'
-      }
-      const queryString = new URLSearchParams(params).toString()
-      const response = await axios
-        .get(`${this.apiUrl}?${queryString}`)
-        .then((r) => r.data)
-      return response as GetOriginalResponse<LastfmResponses[M]>
-    } catch (error) {
-      if (
-        axios.isAxiosError(error) &&
-        error.response &&
-        isLastfmError(error?.response?.data)
-      ) {
-        throw new LastfmError(error.response.data)
-      } else throw error
+    params = {
+      ...params,
+      method,
+      api_key: this.apiKey,
+      format: 'json'
     }
+    const queryString = new URLSearchParams(params).toString()
+
+    const response = await fetch(`${this.apiUrl}?${queryString}`)
+    const data = await response.json().then((a) => a.data)
+    if (!response.ok) throw new LastfmError(data)
+
+    return data as GetOriginalResponse<LastfmResponses[M]>
   }
 }

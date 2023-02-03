@@ -79,7 +79,7 @@ export enum LastfmErrorCode {
   TEMPORARY_ERROR = 16,
 
   /**
-   * User requires to be logged in to use this
+   * User requires to be logged in to use this method
    * This may be caused when trying to get some user's data with restricted privicy
    */
   REQUIRES_LOGIN = 17,

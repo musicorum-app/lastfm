@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { LastfmError } from './error/LastfmError.js'
 import { User } from './packages/User.js'
 import type {
@@ -14,10 +15,26 @@ export default class LastClient {
   constructor(
     public apiKey: string,
     public apiSecret?: string,
-    public sessionToken?: string
+    public sessionToken?: string,
+    public userAgent?: string
   ) {
     if (!apiKey) throw new Error('apiKey is required and is missing')
   }
+
+  onRequestStarted(
+    method: LastfmApiMethod,
+    params: Record<string, string>,
+    internalData: Record<string, never>
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+  ) {}
+
+  onRequestFinished(
+    method: LastfmApiMethod,
+    params: Record<string, string>,
+    internalData: Record<string, never>,
+    response: Record<string, never>
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+  ) {}
 
   /**
    * @todo implement signed requests
@@ -34,8 +51,18 @@ export default class LastClient {
     }
     const queryString = new URLSearchParams(params).toString()
 
-    const response = await fetch(`${this.apiUrl}?${queryString}`)
-    const data = await response.json().then((a) => a.data)
+    const internalData = {}
+    this.onRequestStarted(method, params, internalData)
+    const response = await fetch(`${this.apiUrl}?${queryString}`, {
+      headers: {
+        'User-Agent':
+          this.userAgent ??
+          'Unknown app (@musicorum/lastfm; github.com/musicorum-app/lastfm)'
+      }
+    })
+    const data = await response.json()
+    this.onRequestFinished(method, params, internalData, data)
+
     if (!response.ok) throw new LastfmError(data)
 
     return data as GetOriginalResponse<LastfmResponses[M]>

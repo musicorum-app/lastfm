@@ -8,7 +8,7 @@ Fully typed [Last.fm](https://last.fm) api client library written and made for T
 ## Basic usage
 
 ```ts
-import LastClient from '@musicorum/lastfm'
+import { LastClient } from '@musicorum/lastfm'
 
 const client = new LastClient('e8077692fe0485f6b474fdab331793c')
 

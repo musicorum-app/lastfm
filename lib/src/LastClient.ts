@@ -7,7 +7,7 @@ import type {
   LastfmResponses
 } from './types/responses'
 
-export default class LastClient {
+export class LastClient {
   private apiUrl = 'https://ws.audioscrobbler.com/2.0'
 
   public user = new User(this)

@@ -1,5 +1,5 @@
-import LastClient from '@musicorum/lastfm'
-import {LastfmError, LastfmErrorCode} from '@musicorum/lastfm/dist/error/LastfmError.js'
+import { LastClient } from '@musicorum/lastfm'
+import { LastfmError, LastfmErrorCode } from '@musicorum/lastfm/dist/error/LastfmError.js'
 
 class MonitoredClient extends LastClient {
   constructor () {

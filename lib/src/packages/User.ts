@@ -1,4 +1,4 @@
-import type LastClient from '../LastClient'
+import type { LastClient } from '../LastClient'
 import PaginatedResult from '../PaginatedResource.js'
 import {
   LastfmRecentTracksResponse,

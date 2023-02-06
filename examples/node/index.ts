@@ -1,4 +1,5 @@
 import { LastClient } from '@musicorum/lastfm'
+import { deepStrictEqual } from 'assert'
 
 class MonitoredClient extends LastClient {
   constructor () {
@@ -51,9 +52,9 @@ async function main() {
     username: 'blueslimee'
   })
 
-  console.log(`blueslimee has ${trackInfo2.user!.playCount} plays on ${trackInfo2.name} vs ${trackInfo.track.userplaycount} plays on ${trackInfo.track.name}`)
-
-
+  const nonExistingTrack = await client.track.getInfo('21 Reasons', 'SEULBI')
+  deepStrictEqual(nonExistingTrack, undefined)
+  console.log(`blueslimee has ${trackInfo2!.user!.playCount} plays on ${trackInfo2!.name} vs ${trackInfo!.track!.userplaycount} plays on ${trackInfo!.track!.name}`)
   
   const page1 = recentTracks.getPage(1)
   const page2 = await recentTracks.fetchPage(2)

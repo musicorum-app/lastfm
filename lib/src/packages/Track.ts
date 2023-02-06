@@ -11,13 +11,16 @@ export class Track {
     trackName: string,
     artistName: string,
     params?: LastfmTrackInfoParams
-  ): Promise<GetFormattedResponse<LastfmResponses['track.getInfo']>> {
+  ): Promise<
+    GetFormattedResponse<LastfmResponses['track.getInfo']> | undefined
+  > {
     const original = await this.client.request('track.getInfo', {
       track: trackName,
       artist: artistName,
       autocorrect: params?.autoCorrect === true ? '1' : '0',
       username: params?.username
     })
+    if (!original.track) return undefined
 
     return {
       user:

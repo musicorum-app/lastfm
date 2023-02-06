@@ -8,7 +8,7 @@ import type {
 } from './common'
 
 export interface LastfmOriginalTrackInfoResponse {
-  track: {
+  track?: {
     artist: StringRecord<'mbid' | 'name' | 'url'>
     streamable: StringRecord<'fulltrack' | '#text'>
     image?: LastfmRawImage[]

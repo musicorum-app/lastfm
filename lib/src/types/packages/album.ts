@@ -11,6 +11,7 @@ export interface LastfmOriginalAlbumInfoTrackResponse {
   streamable: StringRecord<'fulltrack' | '#text'>
   name: string
   duration?: number
+  images: LastfmRawImage[]
   artist: StringRecord<'mbid' | 'name' | 'url'>
   url: string
   '@attr'?: {

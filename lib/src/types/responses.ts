@@ -12,6 +12,10 @@ import {
   LastfmAlbumInfo,
   LastfmOriginalAlbumInfoResponse
 } from './packages/album'
+import {
+  LastfmArtistInfo,
+  LastfmOriginalArtistInfoResponse
+} from './packages/artist'
 
 export interface LastfmErrorResponse {
   error: number
@@ -42,6 +46,10 @@ export type LastfmResponses = {
   'album.getInfo': LastfmResponse<
     LastfmOriginalAlbumInfoResponse,
     LastfmAlbumInfo
+  >
+  'artist.getInfo': LastfmResponse<
+    LastfmOriginalArtistInfoResponse,
+    LastfmArtistInfo
   >
 }
 

@@ -2,12 +2,13 @@
 import { LastfmError } from './error/LastfmError.js'
 import { User } from './packages/User.js'
 import { Track } from './packages/Track.js'
+import { Album } from './packages/Album.js'
+import { Artist } from './packages/Artist.js'
 import type {
   GetOriginalResponse,
   LastfmApiMethod,
   LastfmResponses
 } from './types/responses'
-import { Album } from './packages/Album.js'
 
 export class LastClient {
   private apiUrl = 'https://ws.audioscrobbler.com/2.0'
@@ -15,6 +16,7 @@ export class LastClient {
   public user = new User(this)
   public track = new Track(this)
   public album = new Album(this)
+  public artist = new Artist(this)
 
   constructor(
     public apiKey: string,

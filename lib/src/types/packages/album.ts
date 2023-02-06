@@ -80,7 +80,7 @@ export interface LastfmAlbumInfoParams {
    */
   mbid?: string
   /**
-   *  Whether to correct any spelling mistakes in the artist and track names. Returns the corrected version.
+   *  Whether to correct any spelling mistakes in the artist and album names. Returns the corrected version.
    */
   autoCorrect?: boolean
   /**

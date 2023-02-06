@@ -63,6 +63,15 @@ async function main() {
   })
   console.log(`blueslimee has ${albumInfo2!.user!.playCount} plays on ${albumInfo2!.name} vs. ${albumInfo!.album!.userplaycount} plays on ${albumInfo!.album!.name}`)
 
+  const artistInfo = await client.request('artist.getInfo', {
+    artist: 'Artic Monkeys',
+    username: 'MysteryMS'
+  })
+  const artistInfo2 = await client.artist.getInfo('Kendrick Lamar', {
+    username: 'MysteryMS'
+  })
+  console.log(`MysteryMS has ${artistInfo2!.user!.playCount} plays on ${artistInfo2!.name} vs. ${artistInfo!.artist!.stats!.userplaycount} plays on ${artistInfo!.artist!.name}`)
+
   const page1 = recentTracks.getPage(1)
   const page2 = await recentTracks.fetchPage(2)
 

@@ -1,5 +1,4 @@
 import { LastClient } from '@musicorum/lastfm'
-import { LastfmError, LastfmErrorCode } from '@musicorum/lastfm/dist/error/LastfmError.js'
 
 class MonitoredClient extends LastClient {
   constructor () {
@@ -40,6 +39,20 @@ async function main() {
     extended: false
   })
   console.log(`${recentTracks.totalResults} results in ${recentTracks.totalPages} pages`)
+
+  const trackInfo = await client.request('track.getInfo', {
+    artist: 'NewJeans',
+    track: 'OMG',
+    autocorrect: '1',
+    username: 'blueslimee'
+  })
+  const trackInfo2 = await client.track.getInfo('28 Reasons', 'SEULGI', {
+    autoCorrect: true,
+    username: 'blueslimee'
+  })
+
+  console.log(`blueslimee has ${trackInfo2.user!.playCount} plays on ${trackInfo2.name} vs ${trackInfo.track.userplaycount} plays on ${trackInfo.track.name}`)
+
 
   
   const page1 = recentTracks.getPage(1)

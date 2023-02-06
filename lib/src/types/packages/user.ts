@@ -65,7 +65,7 @@ export interface LastfmUserRecentTracksParams {
    */
   to?: Date
   /**
-   * Extended response includes whether or not the user has loved each track
+   * Extended response includes whether the user has loved each track
    * The API also returns images for the artists of each track, but this is omitted since it defaults to a default image
    */
   extended?: boolean

@@ -17,6 +17,18 @@ export interface LastfmImage {
   url: string
 }
 
+export interface LastfmRawWikiData {
+  published: string
+  summary: string
+  content: string
+}
+
+export interface LastfmWikiData {
+  published: Date
+  summary: string
+  content: string
+}
+
 export type PaginatedResponseAttributes<EXTRA extends string = never> = {
   totalPages: string
   page: string
@@ -25,3 +37,5 @@ export type PaginatedResponseAttributes<EXTRA extends string = never> = {
 } & { [K in EXTRA]: string }
 
 export type LastfmDate = StringRecord<'uts' | '#text'>
+
+export type LastfmTag = StringRecord<'name' | 'url'>

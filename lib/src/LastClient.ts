@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { LastfmError } from './error/LastfmError.js'
 import { User } from './packages/User.js'
+import { Track } from './packages/Track.js'
+import { Album } from './packages/Album.js'
+import { Artist } from './packages/Artist.js'
 import type {
   GetOriginalResponse,
   LastfmApiMethod,
@@ -11,6 +14,9 @@ export class LastClient {
   private apiUrl = 'https://ws.audioscrobbler.com/2.0'
 
   public user = new User(this)
+  public track = new Track(this)
+  public album = new Album(this)
+  public artist = new Artist(this)
 
   constructor(
     public apiKey: string,
@@ -41,7 +47,7 @@ export class LastClient {
    */
   async request<M extends LastfmApiMethod>(
     method: M,
-    params?: Record<string, string>
+    params?: Record<string, string | (string | undefined)>
   ) {
     params = {
       ...params,
@@ -49,10 +55,15 @@ export class LastClient {
       api_key: this.apiKey,
       format: 'json'
     }
-    const queryString = new URLSearchParams(params).toString()
+
+    const cleanParams: { [p: string]: string } = Object.fromEntries(
+      Object.entries(params).filter(([_, v]) => !!v) as [string, string][]
+    )
+
+    const queryString = new URLSearchParams(cleanParams).toString()
 
     const internalData = {}
-    this.onRequestStarted(method, params, internalData)
+    this.onRequestStarted(method, cleanParams, internalData)
     const response = await fetch(`${this.apiUrl}?${queryString}`, {
       headers: {
         'User-Agent':
@@ -61,7 +72,7 @@ export class LastClient {
       }
     })
     const data = await response.json()
-    this.onRequestFinished(method, params, internalData, data)
+    this.onRequestFinished(method, cleanParams, internalData, data)
 
     if (!response.ok) throw new LastfmError(data)
 

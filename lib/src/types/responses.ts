@@ -4,6 +4,18 @@ import type {
   LastfmOriginalUserTopArtistsResponse,
   LastfmUserInfo
 } from './packages/user'
+import {
+  LastfmOriginalTrackInfoResponse,
+  LastfmTrackInfo
+} from './packages/track'
+import {
+  LastfmAlbumInfo,
+  LastfmOriginalAlbumInfoResponse
+} from './packages/album'
+import {
+  LastfmArtistInfo,
+  LastfmOriginalArtistInfoResponse
+} from './packages/artist'
 
 export interface LastfmErrorResponse {
   error: number
@@ -27,6 +39,18 @@ export type LastfmResponses = {
     LastfmOriginalUserRecentTracksResponse<true | false>
   >
   'user.getTopArtists': LastfmResponse<LastfmOriginalUserTopArtistsResponse>
+  'track.getInfo': LastfmResponse<
+    LastfmOriginalTrackInfoResponse,
+    LastfmTrackInfo
+  >
+  'album.getInfo': LastfmResponse<
+    LastfmOriginalAlbumInfoResponse,
+    LastfmAlbumInfo
+  >
+  'artist.getInfo': LastfmResponse<
+    LastfmOriginalArtistInfoResponse,
+    LastfmArtistInfo
+  >
 }
 
 export type LastfmApiMethod = keyof LastfmResponses

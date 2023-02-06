@@ -15,9 +15,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 19
-      - run: cd lib
-      - run: npm ci
-      - run: npm run build
+      - run: cd lib && yarn install
+      - run: cd lib && npm run build
 
   publish-gpr:
     needs: build
@@ -31,9 +30,8 @@ jobs:
         with:
           node-version: 19
           registry-url: https://npm.pkg.github.com/
-      - run: cd lib
-      - run: npm ci
-      - run: npm run build
-      - run: npm publish
+      - run: cd lib && yarn install
+      - run: cd lib && npm run build
+      - run: cd lib && npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}

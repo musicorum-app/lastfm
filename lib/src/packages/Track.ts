@@ -17,6 +17,7 @@ export class Track {
     const original = await this.client.request('track.getInfo', {
       track: trackName,
       artist: artistName,
+      mbid: params?.mbid,
       autocorrect: params?.autoCorrect === true ? '1' : '0',
       username: params?.username
     })

@@ -8,6 +8,10 @@ import {
   LastfmOriginalTrackInfoResponse,
   LastfmTrackInfo
 } from './packages/track'
+import {
+  LastfmAlbumInfo,
+  LastfmOriginalAlbumInfoResponse
+} from './packages/album'
 
 export interface LastfmErrorResponse {
   error: number
@@ -34,6 +38,10 @@ export type LastfmResponses = {
   'track.getInfo': LastfmResponse<
     LastfmOriginalTrackInfoResponse,
     LastfmTrackInfo
+  >
+  'album.getInfo': LastfmResponse<
+    LastfmOriginalAlbumInfoResponse,
+    LastfmAlbumInfo
   >
 }
 

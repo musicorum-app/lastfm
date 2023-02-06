@@ -12,7 +12,7 @@ export interface LastfmOriginalTrackInfoResponse {
     artist: StringRecord<'mbid' | 'name' | 'url'>
     streamable: StringRecord<'fulltrack' | '#text'>
     image?: LastfmRawImage[]
-    mbid: string
+    mbid?: string
     album?: {
       artist: string
       title: string
@@ -33,10 +33,10 @@ export interface LastfmOriginalTrackInfoResponse {
   }
 }
 
-// user.getInfo
+// track.getInfo
 export interface LastfmTrackInfo {
   name: string
-  mbid: string
+  mbid?: string
   url: string
   artist: {
     name: string

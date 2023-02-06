@@ -12,7 +12,6 @@ class MonitoredClient extends LastClient {
     internalData: Record<string, any>
   ) {
     internalData.startedAt = Date.now()
-    console.log('request to', method, 'started')
   }
 
   onRequestFinished(
@@ -31,10 +30,7 @@ async function main() {
   const user1 = await client.request('user.getInfo', { user: 'metye' })
   const user2 = await client.user.getInfo('metye')
 
-  console.log(
-    user1.user.playcount,
-    user2.images
-  )
+  console.log(user2.playCount)
   
   const recentTracks = await client.user.getRecentTracksPaginated('metye', {
     extended: false
@@ -54,13 +50,22 @@ async function main() {
 
   const nonExistingTrack = await client.track.getInfo('21 Reasons', 'SEULBI')
   deepStrictEqual(nonExistingTrack, undefined)
-  console.log(`blueslimee has ${trackInfo2!.user!.playCount} plays on ${trackInfo2!.name} vs ${trackInfo!.track!.userplaycount} plays on ${trackInfo!.track!.name}`)
-  
+  console.log(`blueslimee has ${trackInfo2!.user!.playCount} plays on ${trackInfo2!.name} vs. ${trackInfo!.track!.userplaycount} plays on ${trackInfo!.track!.name}`)
+
+  const albumInfo = await client.request('album.getInfo', {
+    artist: 'Sabrina Carpenter',
+    album: 'Singular Act I',
+    username: 'blueslimee'
+  })
+  const albumInfo2 = await client.album.getInfo('emails i can\'t send', 'Sabrina Carpenter', {
+    username: 'blueslimee',
+    biographyLanguage: 'por'
+  })
+  console.log(`blueslimee has ${albumInfo2!.user!.playCount} plays on ${albumInfo2!.name} vs. ${albumInfo!.album!.userplaycount} plays on ${albumInfo!.album!.name}`)
+
   const page1 = recentTracks.getPage(1)
   const page2 = await recentTracks.fetchPage(2)
-  console.log(page1[2])
 
   console.log(page1[0].name, '- is listening now:', page1[0].nowPlaying)
-  console.log(page2[0].name)
 }
 main()

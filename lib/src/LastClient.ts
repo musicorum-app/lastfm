@@ -7,12 +7,14 @@ import type {
   LastfmApiMethod,
   LastfmResponses
 } from './types/responses'
+import { Album } from './packages/Album.js'
 
 export class LastClient {
   private apiUrl = 'https://ws.audioscrobbler.com/2.0'
 
   public user = new User(this)
   public track = new Track(this)
+  public album = new Album(this)
 
   constructor(
     public apiKey: string,

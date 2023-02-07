@@ -3,7 +3,7 @@ import { deepStrictEqual } from 'assert'
 
 class MonitoredClient extends LastClient {
   constructor () {
-    super(process.env.LASTFM_KEY!)
+    super(process.env.LASTFM_KEY!, process.env.LASTFM_SECRET!)
   }
 
   onRequestStarted(
@@ -76,5 +76,20 @@ async function main() {
   const page2 = await recentTracks.fetchPage(2)
 
   console.log(page1[0].name, '- is listening now:', page1[0].nowPlaying)
+
+  console.log('waiting 5 seconds to proceed testing')
+  await new Promise(resolve => setTimeout(resolve, 5000))
+
+  const token = await client.auth.getToken()
+  const url = client.utilities.buildDesktopAuthURL(token)
+
+  console.log('paste in this url in your browser:', url)
+  console.log('press enter once you have authorized the app')
+  await new Promise(resolve => process.stdin.once('data', resolve))
+
+  const session = await client.auth.getSession(token)
+  console.log(`hello ${session.username}! your session key is ${session.key}. subscriber? ${session.subscriber}`)
+
+  process.exit(0)
 }
 main()

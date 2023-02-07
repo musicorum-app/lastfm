@@ -16,6 +16,11 @@ import {
   LastfmArtistInfo,
   LastfmOriginalArtistInfoResponse
 } from './packages/artist'
+import {
+  LastfmAuthGetSessionResponse,
+  LastfmAuthGetTokenResponse,
+  LastfmOriginalAuthGetSessionResponse
+} from './packages/auth'
 
 export interface LastfmErrorResponse {
   error: number
@@ -50,6 +55,11 @@ export type LastfmResponses = {
   'artist.getInfo': LastfmResponse<
     LastfmOriginalArtistInfoResponse,
     LastfmArtistInfo
+  >
+  'auth.getToken': LastfmResponse<LastfmAuthGetTokenResponse>
+  'auth.getSession': LastfmResponse<
+    LastfmOriginalAuthGetSessionResponse,
+    LastfmAuthGetSessionResponse
   >
 }
 

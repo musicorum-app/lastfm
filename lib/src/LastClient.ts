@@ -4,6 +4,8 @@ import { User } from './packages/User.js'
 import { Track } from './packages/Track.js'
 import { Album } from './packages/Album.js'
 import { Artist } from './packages/Artist.js'
+import { Auth } from './packages/Auth.js'
+import { Utilities } from './packages/Utilities.js'
 import type {
   GetOriginalResponse,
   LastfmApiMethod,
@@ -18,6 +20,8 @@ export class LastClient {
   public track = new Track(this)
   public album = new Album(this)
   public artist = new Artist(this)
+  public auth = new Auth(this)
+  public utilities = new Utilities(this)
 
   constructor(
     public apiKey: string,
@@ -74,6 +78,7 @@ export class LastClient {
 
       const signature =
         Object.entries(orderedParams)
+          .filter(([k]) => k !== 'format')
           .map(([k, v]) => `${k}${v}`)
           .join('') + this.apiSecret
 

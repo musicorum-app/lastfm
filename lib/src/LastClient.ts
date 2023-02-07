@@ -9,6 +9,7 @@ import type {
   LastfmApiMethod,
   LastfmResponses
 } from './types/responses'
+import crypto from 'crypto'
 
 export class LastClient {
   private apiUrl = 'https://ws.audioscrobbler.com/2.0'
@@ -47,8 +48,14 @@ export class LastClient {
    */
   async request<M extends LastfmApiMethod>(
     method: M,
-    params?: Record<string, string | (string | undefined)>
+    params?: Record<string, string | (string | undefined)>,
+    signed = false
   ) {
+    if (signed && !this.apiSecret)
+      throw new Error('apiSecret is required for signed requests')
+    if (signed && !this.sessionToken && !params?.['sk'])
+      throw new Error('sessionKey is required for signed requests')
+
     params = {
       ...params,
       method,
@@ -60,7 +67,29 @@ export class LastClient {
       Object.entries(params).filter(([_, v]) => !!v) as [string, string][]
     )
 
-    const queryString = new URLSearchParams(cleanParams).toString()
+    const searchParams = new URLSearchParams(cleanParams)
+    if (signed) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      if (!params!.sk) searchParams.set('sk', this.sessionToken!)
+
+      // order cleanParams alphabetically by key
+      const orderedParams = Object.fromEntries(
+        Object.entries(cleanParams).sort(([a], [b]) => a.localeCompare(b))
+      )
+
+      const signature =
+        Object.entries(orderedParams)
+          .map(([k, v]) => `${k}${v}`)
+          .join('') + this.apiSecret
+
+      const hashedSignature = crypto
+        .createHash('md5')
+        .update(signature)
+        .digest('hex')
+
+      searchParams.set('api_sig', hashedSignature)
+    }
+    const queryString = searchParams.toString()
 
     const internalData = {}
     this.onRequestStarted(method, cleanParams, internalData)

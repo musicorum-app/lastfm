@@ -53,8 +53,6 @@ export class LastClient {
   ) {
     if (signed && !this.apiSecret)
       throw new Error('apiSecret is required for signed requests')
-    if (signed && !this.sessionToken && !params?.['sk'])
-      throw new Error('sessionKey is required for signed requests')
 
     params = {
       ...params,
@@ -69,9 +67,6 @@ export class LastClient {
 
     const searchParams = new URLSearchParams(cleanParams)
     if (signed) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      if (!params!.sk) searchParams.set('sk', this.sessionToken!)
-
       // order cleanParams alphabetically by key
       const orderedParams = Object.fromEntries(
         Object.entries(cleanParams).sort(([a], [b]) => a.localeCompare(b))

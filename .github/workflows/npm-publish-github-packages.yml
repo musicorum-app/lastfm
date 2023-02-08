@@ -20,7 +20,7 @@ jobs:
           scope: '@musicorum-app'
           always-auth: true
       - run: yarn
-      - run: cd lib && echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
+      - run: cd lib && echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}\nregistry=https://npm.pkg.github.com\nalways-auth=true" > .npmrc
       - run: cd lib && npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -21,6 +21,6 @@ jobs:
           always-auth: true
       - run: yarn
       - run: cd lib && echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}\nregistry=https://npm.pkg.github.com\nalways-auth=true" > .npmrc
-      - run: cd lib && npm publish
+      - run: cd lib && npm i && npm publish --no-workspaces
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

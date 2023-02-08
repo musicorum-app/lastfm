@@ -20,6 +20,6 @@ jobs:
       - run: cp .npmrc lib/.npmrc
       - run: cd lib && yarn
       - run: cd lib && yarn run build
-      - run: cd lib && yarn publish
+      - run: cd lib && npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

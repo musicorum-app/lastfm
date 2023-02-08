@@ -8,7 +8,7 @@
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "cp ../README.md ./README.md"
+    "prepublish": "tsc && cp ../README.md ./README.md"
   },
   "engines": {
     "node": ">=17.5.0"

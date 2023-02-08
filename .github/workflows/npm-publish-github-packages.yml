@@ -17,9 +17,8 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
           # Defaults to the user or organization that owns the workflow file
           scope: '@musicorum-app'
-      - run: cp .npmrc lib/.npmrc
-      - run: cd lib && yarn
-      - run: cd lib && yarn run build
+      - run: cd lib && npm ci
+      - run: cd lib && npm run build
       - run: cd lib && npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

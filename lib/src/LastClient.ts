@@ -4,11 +4,14 @@ import { User } from './packages/User.js'
 import { Track } from './packages/Track.js'
 import { Album } from './packages/Album.js'
 import { Artist } from './packages/Artist.js'
+import { Auth } from './packages/Auth.js'
+import { Utilities } from './packages/Utilities.js'
 import type {
   GetOriginalResponse,
   LastfmApiMethod,
   LastfmResponses
 } from './types/responses'
+import crypto from 'crypto'
 
 export class LastClient {
   private apiUrl = 'https://ws.audioscrobbler.com/2.0'
@@ -17,6 +20,8 @@ export class LastClient {
   public track = new Track(this)
   public album = new Album(this)
   public artist = new Artist(this)
+  public auth = new Auth(this)
+  public utilities = new Utilities(this)
 
   constructor(
     public apiKey: string,
@@ -47,8 +52,12 @@ export class LastClient {
    */
   async request<M extends LastfmApiMethod>(
     method: M,
-    params?: Record<string, string | (string | undefined)>
+    params?: Record<string, string | (string | undefined)>,
+    signed = false
   ) {
+    if (signed && !this.apiSecret)
+      throw new Error('apiSecret is required for signed requests')
+
     params = {
       ...params,
       method,
@@ -60,7 +69,27 @@ export class LastClient {
       Object.entries(params).filter(([_, v]) => !!v) as [string, string][]
     )
 
-    const queryString = new URLSearchParams(cleanParams).toString()
+    const searchParams = new URLSearchParams(cleanParams)
+    if (signed) {
+      // order cleanParams alphabetically by key
+      const orderedParams = Object.fromEntries(
+        Object.entries(cleanParams).sort(([a], [b]) => a.localeCompare(b))
+      )
+
+      const signature =
+        Object.entries(orderedParams)
+          .filter(([k]) => k !== 'format')
+          .map(([k, v]) => `${k}${v}`)
+          .join('') + this.apiSecret
+
+      const hashedSignature = crypto
+        .createHash('md5')
+        .update(signature)
+        .digest('hex')
+
+      searchParams.set('api_sig', hashedSignature)
+    }
+    const queryString = searchParams.toString()
 
     const internalData = {}
     this.onRequestStarted(method, cleanParams, internalData)

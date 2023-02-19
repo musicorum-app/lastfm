@@ -3,7 +3,7 @@
     "module": "ESNext",
     "target": "esnext",
     "declaration": true,
-    "outDir": "./lib/dist",
+    "outDir": "./dist",
     "sourceMap": false,
     "strict": true,
     "esModuleInterop": true,
@@ -12,9 +12,9 @@
   "exclude": [
     "node_modules",
     "examples",
-    "lib/dist"
+    "dist"
   ],
   "include": [
-    "lib"
+    "src"
   ]
 }

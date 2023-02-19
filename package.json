@@ -1,9 +1,48 @@
 {
-  "name": "musicorum-lastfm",
-  "version": "0.0.0",
-  "private": true,
-  "workspaces": [
-    "lib",
-    "examples/node"
-  ]
+  "name": "@musicorum/lastfm",
+  "version": "0.1.4",
+  "description": "",
+  "main": "dist/LastClient.js",
+  "types": "dist/LastClient.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "tsc"
+  },
+  "engines": {
+    "node": ">=17.5.0"
+  },
+  "keywords": [
+    "lastfm",
+    "last.fm",
+    "typed"
+  ],
+  "author": "Musicorum Team",
+  "contributors": [
+    {
+      "name": "Matheus Dias",
+      "email": "methidezeeni@gmail.com",
+      "url": "https://matehus.dev"
+    },
+    {
+      "name": "Renan Ribeiro",
+      "email": "lyricalsoul@proton.me"
+    }
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/musicorum-app/lastfm"
+  },
+  "devDependencies": {
+    "@types/node": "^18.14.0",
+    "@typescript-eslint/eslint-plugin": "^5.52.0",
+    "@typescript-eslint/parser": "^5.52.0",
+    "eslint": "^8.34.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.4",
+    "typescript": "^4.9.5"
+  }
 }

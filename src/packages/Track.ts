@@ -66,4 +66,28 @@ export class Track {
         : undefined
     }
   }
+
+  async love(
+    trackName: string,
+    artistName: string,
+    token: string
+  ): Promise<void> {
+    await this.client.request('track.love', {
+      track: trackName,
+      artist: artistName,
+      token
+    })
+  }
+
+  async unlove(
+    trackName: string,
+    artistName: string,
+    token: string
+  ): Promise<void> {
+    await this.client.request('track.unlove', {
+      track: trackName,
+      artist: artistName,
+      token
+    })
+  }
 }

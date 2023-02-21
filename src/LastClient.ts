@@ -22,14 +22,20 @@ export class LastClient {
   public artist = new Artist(this)
   public auth = new Auth(this)
   public utilities = new Utilities(this)
+  private readonly headers: Record<string, string>
 
   constructor(
     public apiKey: string,
     public apiSecret?: string,
-    public sessionToken?: string,
-    public userAgent?: string
+    userAgent?: string
   ) {
     if (!apiKey) throw new Error('apiKey is required and is missing')
+
+    this.headers = {
+      'User-Agent':
+        userAgent ??
+        'Unknown app (@musicorum/lastfm; github.com/musicorum-app/lastfm)'
+    }
   }
 
   onRequestStarted(
@@ -53,7 +59,8 @@ export class LastClient {
   async request<M extends LastfmApiMethod>(
     method: M,
     params?: Record<string, string | (string | undefined)>,
-    signed = false
+    signed = false,
+    write = false
   ) {
     if (signed && !this.apiSecret)
       throw new Error('apiSecret is required for signed requests')
@@ -93,13 +100,14 @@ export class LastClient {
 
     const internalData = {}
     this.onRequestStarted(method, cleanParams, internalData)
-    const response = await fetch(`${this.apiUrl}?${queryString}`, {
-      headers: {
-        'User-Agent':
-          this.userAgent ??
-          'Unknown app (@musicorum/lastfm; github.com/musicorum-app/lastfm)'
-      }
-    })
+    const response = write
+      ? await fetch(`${this.apiUrl}/?format=json`, {
+          method: 'POST',
+          headers: this.headers,
+          body: queryString
+        })
+      : await fetch(`${this.apiUrl}?${queryString}`, { headers: this.headers })
+
     const data = await response.json()
     this.onRequestFinished(method, cleanParams, internalData, data)
 

@@ -61,6 +61,8 @@ export type LastfmResponses = {
     LastfmOriginalAuthGetSessionResponse,
     LastfmAuthGetSessionResponse
   >
+  'track.love': LastfmResponse<undefined>
+  'track.unlove': LastfmResponse<undefined>
 }
 
 export type LastfmApiMethod = keyof LastfmResponses

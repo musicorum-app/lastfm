@@ -3,6 +3,7 @@ import type {
   LastfmImage,
   LastfmRawImage,
   PaginatedResponseAttributes,
+  Period,
   StringRecord
 } from './common'
 
@@ -156,4 +157,55 @@ export interface LastfmOriginalUserTopArtistsResponse {
     }[]
     '@attr': PaginatedResponseAttributes<'user'>
   }
+}
+
+// user.getTopAlbums
+
+export interface LastfmUserTopAlbumsParams {
+  /**
+   * The time period over which to retrieve top albums for. Defaults for overall
+   */
+  period?: Period
+  /**
+   * The number of results to fetch per page. Defaults to 50
+   */
+  limit?: number
+  /**
+   * The page number to fetch. Defaults to first page
+   */
+  page?: number
+}
+
+export interface LastfmOriginalUserTopAlbumsResponse {
+  topalbums: {
+    album: {
+      artist: {
+        url: string
+        name: string
+        mbid?: string
+      }
+      image: LastfmRawImage[]
+      mbid?: string
+      url: string
+      playcount: string
+      name: string
+      '@attr': {
+        rank: string
+      }
+    }[]
+    '@attr': PaginatedResponseAttributes<'user'>
+  }
+}
+
+export interface LastfmUserTopAlbum {
+  artist: {
+    url: string
+    name: string
+    mbid?: string
+  }
+  name: string
+  mbid?: string
+  images: LastfmImage[]
+  playCount: number
+  rank: number
 }

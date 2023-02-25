@@ -58,7 +58,7 @@ export class LastClient {
    */
   async request<M extends LastfmApiMethod>(
     method: M,
-    params?: Record<string, string | (string | undefined)>,
+    params?: Record<string, string | number | undefined>,
     signed = false,
     write = false
   ) {

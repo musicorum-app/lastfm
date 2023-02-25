@@ -1,8 +1,10 @@
 import type {
   LastfmOriginalUserInfoResponse,
   LastfmOriginalUserRecentTracksResponse,
+  LastfmOriginalUserTopAlbumsResponse,
   LastfmOriginalUserTopArtistsResponse,
-  LastfmUserInfo
+  LastfmUserInfo,
+  LastfmUserTopAlbum
 } from './packages/user'
 import {
   LastfmOriginalTrackInfoResponse,
@@ -21,6 +23,7 @@ import {
   LastfmAuthGetTokenResponse,
   LastfmOriginalAuthGetSessionResponse
 } from './packages/auth'
+import { PaginatedResponse } from './packages/common'
 
 export interface LastfmErrorResponse {
   error: number
@@ -44,6 +47,10 @@ export type LastfmResponses = {
     LastfmOriginalUserRecentTracksResponse<true | false>
   >
   'user.getTopArtists': LastfmResponse<LastfmOriginalUserTopArtistsResponse>
+  'user.getTopAlbums': LastfmResponse<
+    LastfmOriginalUserTopAlbumsResponse,
+    PaginatedResponse<{ albums: LastfmUserTopAlbum[] }>
+  >
   'track.getInfo': LastfmResponse<
     LastfmOriginalTrackInfoResponse,
     LastfmTrackInfo

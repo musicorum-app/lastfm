@@ -3,10 +3,12 @@ import PaginatedResult from '../PaginatedResource.js'
 import {
   LastfmRecentTracksResponse,
   LastfmRecentTracksTrackResource,
-  LastfmUserRecentTracksParams
+  LastfmUserRecentTracksParams,
+  LastfmUserTopAlbum,
+  LastfmUserTopAlbumsParams
 } from '../types/packages/user'
 import type { GetFormattedResponse, LastfmResponses } from '../types/responses'
-import { parseLastfmImages } from '../utils.js'
+import { parseLastfmImages, parseLastfmPagination } from '../utils.js'
 
 export class User {
   constructor(private client: LastClient) {}
@@ -104,5 +106,29 @@ export class User {
     paginated.appendPage(params?.page ?? 1, metadataResponse.tracks)
 
     return paginated
+  }
+
+  async getTopAlbums(
+    user: string,
+    params?: LastfmUserTopAlbumsParams
+  ): Promise<GetFormattedResponse<LastfmResponses['user.getTopAlbums']>> {
+    const response = await this.client.request('user.getTopAlbums', {
+      ...params,
+      user
+    })
+
+    const albums: LastfmUserTopAlbum[] = response.topalbums.album.map((a) => ({
+      name: a.name,
+      artist: a.artist,
+      playCount: parseInt(a.playcount),
+      rank: parseInt(a['@attr'].rank),
+      mbid: a.mbid,
+      images: parseLastfmImages(a.image)
+    }))
+
+    return {
+      albums,
+      pagination: parseLastfmPagination(response.topalbums['@attr'])
+    }
   }
 }

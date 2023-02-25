@@ -12,6 +12,14 @@ export interface LastfmRawImage {
   '#text': string
 }
 
+export type Period =
+  | 'overall'
+  | '7day'
+  | '1month'
+  | '3month'
+  | '6month'
+  | '12month'
+
 export interface LastfmImage {
   size: LastfmImageSize
   url: string
@@ -35,6 +43,17 @@ export type PaginatedResponseAttributes<EXTRA extends string = never> = {
   perPage: string
   total: string
 } & { [K in EXTRA]: string }
+
+export interface PaginationAttributes {
+  totalPages: number
+  page: number
+  perPage: number
+  total: number
+}
+
+export type PaginatedResponse<I = never> = {
+  pagination: PaginationAttributes
+} & I
 
 export type LastfmDate = StringRecord<'uts' | '#text'>
 

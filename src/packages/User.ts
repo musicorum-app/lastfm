@@ -1,4 +1,4 @@
-import type { LastClient } from '../LastClient'
+import type { LastClient } from '../LastClient.js'
 import PaginatedResult from '../PaginatedResource.js'
 import {
   LastfmRecentTracksResponse,
@@ -6,8 +6,11 @@ import {
   LastfmUserRecentTracksParams,
   LastfmUserTopAlbum,
   LastfmUserTopAlbumsParams
-} from '../types/packages/user'
-import type { GetFormattedResponse, LastfmResponses } from '../types/responses'
+} from '../types/packages/user.js'
+import type {
+  GetFormattedResponse,
+  LastfmResponses
+} from '../types/responses.js'
 import { parseLastfmImages, parseLastfmPagination } from '../utils.js'
 
 export class User {

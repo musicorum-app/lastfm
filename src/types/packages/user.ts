@@ -5,7 +5,7 @@ import type {
   PaginatedResponseAttributes,
   Period,
   StringRecord
-} from './common'
+} from './common.js'
 
 // user.getInfo
 export interface LastfmOriginalUserInfoResponse {

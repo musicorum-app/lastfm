@@ -51,7 +51,7 @@ export interface PaginationAttributes {
   total: number
 }
 
-export type PaginatedResponse<I = never> = {
+export type PaginatedResponse<I> = {
   pagination: PaginationAttributes
 } & I
 

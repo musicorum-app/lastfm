@@ -2,9 +2,10 @@ import type {
   LastfmOriginalUserInfoResponse,
   LastfmOriginalUserRecentTracksResponse,
   LastfmOriginalUserTopAlbumsResponse,
-  LastfmOriginalUserTopArtistsResponse,
   LastfmUserInfo,
-  LastfmUserTopAlbum
+  LastfmUserTopAlbum,
+  UserTopArtists,
+  UserTopTracks
 } from './packages/user'
 import {
   LastfmOriginalTrackInfoResponse,
@@ -46,7 +47,14 @@ export type LastfmResponses = {
   'user.getRecentTracks': LastfmResponse<
     LastfmOriginalUserRecentTracksResponse<true | false>
   >
-  'user.getTopArtists': LastfmResponse<LastfmOriginalUserTopArtistsResponse>
+  'user.getTopArtists': LastfmResponse<
+    UserTopArtists.OriginalResponse,
+    PaginatedResponse<{ artists: UserTopArtists.Artist[] }>
+  >
+  'user.getTopTracks': LastfmResponse<
+    UserTopTracks.OriginalResponse,
+    PaginatedResponse<{ tracks: UserTopTracks.Track[] }>
+  >
   'user.getTopAlbums': LastfmResponse<
     LastfmOriginalUserTopAlbumsResponse,
     PaginatedResponse<{ albums: LastfmUserTopAlbum[] }>

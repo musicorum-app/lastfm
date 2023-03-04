@@ -5,7 +5,9 @@ import {
   LastfmRecentTracksTrackResource,
   LastfmUserRecentTracksParams,
   LastfmUserTopAlbum,
-  LastfmUserTopAlbumsParams
+  LastfmUserTopAlbumsParams,
+  UserTopArtists,
+  UserTopTracks
 } from '../types/packages/user.js'
 import type {
   GetFormattedResponse,
@@ -132,6 +134,59 @@ export class User {
     return {
       albums,
       pagination: parseLastfmPagination(response.topalbums['@attr'])
+    }
+  }
+
+  async getTopArtists(
+    user: string,
+    params?: UserTopArtists.Params
+  ): Promise<GetFormattedResponse<LastfmResponses['user.getTopArtists']>> {
+    const response = await this.client.request('user.getTopArtists', {
+      ...params,
+      user
+    })
+
+    const artists: UserTopArtists.Artist[] = response.topartists.artist.map(
+      (a) => ({
+        name: a.name,
+        mbid: a.mbid,
+        url: a.url,
+        playCount: parseInt(a.playcount),
+        streamable: a.streamable === '1',
+        rank: parseInt(a['@attr'].rank),
+        images: parseLastfmImages(a.image)
+      })
+    )
+
+    return {
+      artists,
+      pagination: parseLastfmPagination(response.topartists['@attr'])
+    }
+  }
+
+  async getTopTracks(
+    user: string,
+    params?: UserTopTracks.Params
+  ): Promise<GetFormattedResponse<LastfmResponses['user.getTopTracks']>> {
+    const response = await this.client.request('user.getTopTracks', {
+      ...params,
+      user
+    })
+
+    const tracks: UserTopTracks.Track[] = response.toptracks.track.map((t) => ({
+      name: t.name,
+      mbid: t.mbid,
+      url: t.url,
+      playCount: parseInt(t.playcount),
+      artist: t.artist,
+      streamable: t.streamable.fulltrack === '1',
+      rank: parseInt(t['@attr'].rank),
+      images: parseLastfmImages(t.image)
+    }))
+
+    return {
+      tracks,
+      pagination: parseLastfmPagination(response.toptracks['@attr'])
     }
   }
 }

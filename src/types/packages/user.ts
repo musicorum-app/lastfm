@@ -144,18 +144,45 @@ export interface LastfmRecentTracksResponse<EXTENDED extends boolean> {
 }
 
 // user.getTopArtists
-export interface LastfmOriginalUserTopArtistsResponse {
-  topartists: {
-    artist: {
-      name: string
-      mbid: string
-      url: string
-      playcount: string
-      streamable: string
-      '@attr': StringRecord<'rank'>
-      image: LastfmRawImage[]
-    }[]
-    '@attr': PaginatedResponseAttributes<'user'>
+export module UserTopArtists {
+  export interface Params {
+    /**
+     * The time period over which to retrieve top artists for. Defaults for overall
+     */
+    period?: Period
+    /**
+     * The number of results to fetch per page. Defaults to 50
+     */
+    limit?: number
+    /**
+     * The page number to fetch. Defaults to first page
+     */
+    page?: number
+  }
+
+  export interface OriginalResponse {
+    topartists: {
+      artist: {
+        name: string
+        mbid?: string
+        url: string
+        playcount: string
+        streamable: string
+        '@attr': StringRecord<'rank'>
+        image: LastfmRawImage[]
+      }[]
+      '@attr': PaginatedResponseAttributes<'user'>
+    }
+  }
+
+  export interface Artist {
+    name: string
+    mbid?: string
+    url: string
+    playCount: number
+    streamable: boolean
+    rank: number
+    images: LastfmImage[]
   }
 }
 
@@ -208,4 +235,62 @@ export interface LastfmUserTopAlbum {
   images: LastfmImage[]
   playCount: number
   rank: number
+}
+
+// user.getTopTracks
+export module UserTopTracks {
+  export interface Params {
+    /**
+     * The time period over which to retrieve top tracks for. Defaults for overall
+     */
+    period?: Period
+    /**
+     * The number of results to fetch per page. Defaults to 50
+     */
+    limit?: number
+    /**
+     * The page number to fetch. Defaults to first page
+     */
+    page?: number
+  }
+
+  export interface OriginalResponse {
+    toptracks: {
+      track: {
+        name: string
+        mbid?: string
+        url: string
+        duration?: string
+        playcount: string
+        streamable: StringRecord<'fulltrack'>
+        artist: {
+          url: string
+          name: string
+          mbid?: string
+        }
+        '@attr': StringRecord<'rank'>
+        image: LastfmRawImage[]
+      }[]
+      '@attr': PaginatedResponseAttributes<'user'>
+    }
+  }
+
+  export interface Track {
+    name: string
+    mbid?: string
+    url: string
+    playCount: number
+    /**
+     * Duration of the track in seconds
+     */
+    duration?: number
+    artist: {
+      url: string
+      name: string
+      mbid?: string
+    }
+    streamable: boolean
+    rank: number
+    images: LastfmImage[]
+  }
 }

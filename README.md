@@ -24,6 +24,7 @@ async function main() {
     user2.playCount
   )
 
+  // Pagination
   const recentTracks = await client.user.getRecentTracksPaginated('metye')
   console.log(`${recentTracks.totalResults} results in ${recentTracks.totalPages} pages`)
 

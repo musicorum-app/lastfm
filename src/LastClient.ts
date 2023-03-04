@@ -39,14 +39,14 @@ export class LastClient {
   }
 
   onRequestStarted(
-    method: LastfmApiMethod,
+    method: LastfmApiMethod | string,
     params: Record<string, string>,
     internalData: Record<string, never>
     // eslint-disable-next-line @typescript-eslint/no-empty-function
   ) {}
 
   onRequestFinished(
-    method: LastfmApiMethod,
+    method: LastfmApiMethod | string,
     params: Record<string, string>,
     internalData: Record<string, never>,
     response: Record<string, never>
@@ -56,7 +56,7 @@ export class LastClient {
   /**
    * @todo implement signed requests
    */
-  async request<M extends LastfmApiMethod>(
+  async request<M extends string = LastfmApiMethod>(
     method: M,
     params?: Record<string, string | number | undefined>,
     signed = false,
@@ -113,6 +113,8 @@ export class LastClient {
 
     if (!response.ok) throw new LastfmError(data)
 
-    return data as GetOriginalResponse<LastfmResponses[M]>
+    return data as M extends LastfmApiMethod
+      ? GetOriginalResponse<LastfmResponses[M]>
+      : unknown
   }
 }

@@ -11,17 +11,21 @@ import {
 const parseAlbumInfoTracks = (
   tracks: LastfmOriginalAlbumInfoTrackResponse[]
 ): LastfmAlbumInfoTrack[] => {
-  return tracks.map((track) => ({
-    name: track.name,
-    duration: track.duration,
-    artist: {
-      name: track.artist.name,
-      mbid: track.artist.mbid ?? undefined,
-      url: track.artist.url
-    },
-    url: track.url,
-    rank: track['@attr']?.rank ?? undefined
-  }))
+  if (Array.isArray(tracks)) {
+    return tracks.map((track) => ({
+      name: track.name,
+      duration: track.duration,
+      artist: {
+        name: track.artist.name,
+        mbid: track.artist.mbid ?? undefined,
+        url: track.artist.url
+      },
+      url: track.url,
+      rank: track['@attr']?.rank ?? undefined
+    }))
+  } else {
+    return tracks
+  }
 }
 export class Album {
   constructor(private client: LastClient) {}

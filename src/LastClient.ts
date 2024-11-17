@@ -104,7 +104,7 @@ export class LastClient {
           headers: this.headers,
           body: queryString
         })
-      : await fetch(`${this.apiUrl}?${queryString}`, { method: 'POST', headers: this.headers })
+      : await fetch(`${this.apiUrl}?${queryString}`, { headers: this.headers })
 
     const data = await response.json()
     this.onRequestFinished(method, cleanParams, internalData, data)

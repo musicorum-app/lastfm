@@ -70,24 +70,24 @@ export class Track {
   async love(
     trackName: string,
     artistName: string,
-    token: string
+    sessionKey: string
   ): Promise<void> {
     await this.client.request('track.love', {
       track: trackName,
       artist: artistName,
-      token
-    })
+      sk: sessionKey
+    }, true, true)
   }
 
   async unlove(
     trackName: string,
     artistName: string,
-    token: string
+    sessionKey: string
   ): Promise<void> {
     await this.client.request('track.unlove', {
       track: trackName,
       artist: artistName,
-      token
-    })
+      sk: sessionKey
+    }, true, true)
   }
 }

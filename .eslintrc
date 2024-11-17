@@ -4,15 +4,8 @@
     "project": "tsconfig.json",
     "sourceType": "module"
   },
-  "parser": "@typescript-eslint/parser",
-  "plugins": [
-    "@typescript-eslint",
-    "prettier"
-  ],
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
   "rules": {
@@ -21,8 +14,6 @@
       {
         "endOfLine": "auto"
       }
-    ],
-    "@typescript-eslint/prefer-namespace-keyword": "off",
-    "@typescript-eslint/no-namespace": "off"
+    ]
   }
 }

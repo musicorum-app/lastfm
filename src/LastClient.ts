@@ -11,7 +11,7 @@ import type {
   LastfmApiMethod,
   LastfmResponses
 } from './types/responses'
-import crypto from 'crypto'
+import crypto from 'node:crypto'
 
 export class LastClient {
   private apiUrl = 'https://ws.audioscrobbler.com/2.0'
@@ -27,14 +27,12 @@ export class LastClient {
   constructor(
     public apiKey: string,
     public apiSecret?: string,
-    userAgent?: string
+    appName?: string
   ) {
     if (!apiKey) throw new Error('apiKey is required and is missing')
 
     this.headers = {
-      'User-Agent':
-        userAgent ??
-        'Unknown app (@musicorum/lastfm; github.com/musicorum-app/lastfm)'
+      'User-Agent': `${appName ?? 'Unspecified App'} (@musicorum/lastfm; github.com/musicorum-app/lastfm)`
     }
   }
 

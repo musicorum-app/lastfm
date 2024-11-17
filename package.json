@@ -1,6 +1,6 @@
 {
   "name": "@musicorum/lastfm",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "",
   "main": "dist/LastClient.js",
   "types": "dist/LastClient.d.ts",
@@ -27,7 +27,7 @@
       "url": "https://matehus.dev"
     },
     {
-      "name": "Renan Ribeiro",
+      "name": "Renan Martins",
       "email": "lyricalsoul@proton.me"
     }
   ],
@@ -37,15 +37,15 @@
     "url": "https://github.com/musicorum-app/lastfm"
   },
   "devDependencies": {
-    "@rollup/plugin-typescript": "^11.0.0",
-    "@types/node": "^18.14.0",
-    "@typescript-eslint/eslint-plugin": "^5.52.0",
-    "@typescript-eslint/parser": "^5.52.0",
-    "eslint": "^8.34.0",
-    "eslint-config-prettier": "^8.6.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "^2.8.4",
-    "rollup": "^3.18.0",
-    "typescript": "^4.9.5"
+    "@rollup/plugin-typescript": "^12.1.1",
+    "@types/node": "^22.9.0",
+    "@typescript-eslint/eslint-plugin": "^8.14.0",
+    "@typescript-eslint/parser": "^8.14.0",
+    "eslint": "^9.15.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "prettier": "^3.3.3",
+    "rollup": "^4.27.2",
+    "typescript": "^5.6.3"
   }
 }

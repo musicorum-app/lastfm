@@ -54,7 +54,11 @@ export class Album {
       playCount: parseInt(original.album.playcount),
       tags: original.album.tags?.tag as LastfmTag[],
       tracks: original.album.tracks?.track
-        ? parseAlbumInfoTracks(original.album.tracks?.track)
+        ? parseAlbumInfoTracks(
+            Array.isArray(original.album.tracks?.track)
+              ? original.album.tracks?.track
+              : [original.album.tracks?.track]
+          )
         : undefined,
       url: original.album.url,
       user: original.album.userplaycount

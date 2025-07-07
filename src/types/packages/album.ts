@@ -35,7 +35,9 @@ export interface LastfmOriginalAlbumInfoResponse {
     }
     wiki?: LastfmRawWikiData
     tracks?: {
-      track: LastfmOriginalAlbumInfoTrackResponse[]
+      track:
+        | LastfmOriginalAlbumInfoTrackResponse
+        | LastfmOriginalAlbumInfoTrackResponse[]
     }
   }
 }

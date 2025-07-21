@@ -3,7 +3,7 @@
   "version": "0.3.4",
   "description": "",
   "main": "dist/index.js",
-  "types": "dist/index.js",
+  "types": "dist/index.d.ts",
   "type": "module",
   "scripts": {
     "build": "npx rollup --config rollup.config.js",

@@ -2,8 +2,8 @@
   "name": "@musicorum/lastfm",
   "version": "0.3.4",
   "description": "",
-  "main": "dist/LastClient.js",
-  "types": "dist/LastClient.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.js",
   "type": "module",
   "scripts": {
     "build": "npx rollup --config rollup.config.js",

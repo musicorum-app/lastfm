@@ -1,10 +1,10 @@
-import typescript from '@rollup/plugin-typescript';
+import typescript from '@rollup/plugin-typescript'
 
 export default {
-  input: ['src/LastClient.ts', 'src/error/LastfmError.ts'],
+  input: ['src/index.ts'],
   output: {
     dir: 'dist',
     format: 'es'
   },
   plugins: [typescript()]
-};
+}

@@ -1,4 +1,6 @@
-# @musicorum/lastfm
+# [@musicorum/lastfm](https://www.npmjs.com/package/@musicorum/lastfm)
+
+
 
 Fully typed [Last.fm](https://last.fm) api client library written and made for Typescript!
 

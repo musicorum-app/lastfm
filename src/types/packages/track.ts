@@ -51,7 +51,7 @@ export interface LastfmTrackInfo {
   }
   duration?: number
   listeners: number
-  playcount: number
+  playCount: number
   tags?: LastfmTag[]
   user?: {
     playCount: number

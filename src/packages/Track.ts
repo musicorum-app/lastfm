@@ -40,7 +40,7 @@ export class Track {
           ? parseInt(original.track.duration)
           : undefined,
       listeners: parseInt(original.track.listeners),
-      playcount: parseInt(original.track.playcount),
+      playCount: parseInt(original.track.playcount),
       artist: {
         name: original.track.artist.name,
         mbid: original.track.artist.mbid ?? undefined,
